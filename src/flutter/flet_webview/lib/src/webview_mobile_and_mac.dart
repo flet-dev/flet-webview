@@ -41,8 +41,7 @@ class _WebviewMobileAndMacState extends State<WebviewMobileAndMac> {
         },
         onUrlChange: (UrlChange url) {
           debugPrint('WebViewControl URL changed: ${url.url}');
-          widget.backend.triggerControlEvent(
-              widget.control.id, "url_change", url.url ?? "");
+          widget.backend.triggerControlEvent(widget.control.id, "url_change", url.url);
         },
         onPageStarted: (String url) {
           debugPrint('WebViewControl page started loading: $url');
