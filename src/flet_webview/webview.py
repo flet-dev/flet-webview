@@ -23,6 +23,15 @@ from flet.core.types import (
     ScaleValue,
 )
 
+__all__ = [
+    "WebviewRequestMethod",
+    "WebviewLogLevelSeverity",
+    "WebviewScrollEvent",
+    "WebviewConsoleMessageEvent",
+    "WebviewJavaScriptEvent",
+    "WebView",
+]
+
 
 class WebviewRequestMethod(Enum):
     GET = "get"
@@ -156,9 +165,9 @@ class WebView(ConstrainedControl):
         expand_loose: Optional[bool] = None,
         col: Optional[ResponsiveNumber] = None,
         opacity: OptionalNumber = None,
-        rotate: RotateValue = None,
-        scale: ScaleValue = None,
-        offset: OffsetValue = None,
+        rotate: Optional[RotateValue] = None,
+        scale: Optional[ScaleValue] = None,
+        offset: Optional[OffsetValue] = None,
         aspect_ratio: OptionalNumber = None,
         animate_opacity: Optional[AnimationValue] = None,
         animate_size: Optional[AnimationValue] = None,
@@ -167,7 +176,7 @@ class WebView(ConstrainedControl):
         animate_scale: Optional[AnimationValue] = None,
         animate_offset: Optional[AnimationValue] = None,
         on_animation_end: OptionalControlEventCallable = None,
-        tooltip: TooltipValue = None,
+        tooltip: Optional[TooltipValue] = None,
         badge: Optional[BadgeValue] = None,
         visible: Optional[bool] = None,
         disabled: Optional[bool] = None,
