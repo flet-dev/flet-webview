@@ -25,7 +25,7 @@ dependencies:
     git:
       url: https://github.com/flet-dev/flet.git
       path: packages/flet
-      ref: v1
+      ref: main
 
 dev_dependencies:
   flutter_test:
