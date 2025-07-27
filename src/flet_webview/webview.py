@@ -1,5 +1,5 @@
 import asyncio
-from typing import List, Optional
+from typing import Optional
 
 import flet as ft
 
@@ -27,103 +27,101 @@ class WebView(ft.ConstrainedControl):
 
     enable_javascript: Optional[bool] = None
     """
-    Enable or disable the JavaScript execution on the page. 
-    
-    Note that disabling the JavaScript execution on the page may result to unexpected web page behaviour.
+    Enable or disable the JavaScript execution on the page.
+
+    Note that disabling the JavaScript execution on the page may result to
+    unexpected web page behaviour.
     """
 
-    prevent_links: Optional[List[str]] = None
+    prevent_links: Optional[list[str]] = None
     """List of url-prefixes that should not be followed/loaded/downloaded."""
 
     bgcolor: Optional[ft.ColorValue] = None
     """Defines the background color of the WebView."""
 
-    on_page_started: ft.OptionalControlEventHandler["WebView"] = None
+    on_page_started: Optional[ft.ControlEventHandler["WebView"]] = None
     """
     Fires soon as the first loading process of the webview page is started.
-    
-    Event handler argument's `data` property is of type `str` and contains the URL.
-    
+
+    Event handler argument's [`data`][flet.Event.data] property is of type
+    `str` and contains the URL.
+
     Note:
         Works only on the following platforms: iOS, Android and macOS.
     """
 
-    on_page_ended: ft.OptionalControlEventHandler["WebView"] = None
+    on_page_ended: Optional[ft.ControlEventHandler["WebView"]] = None
     """
     Fires when all the webview page loading processes are ended.
-    
-    Event handler argument's `data` property is of type `str` and contains the URL.
-    
+
+    Event handler argument's [`data`][flet.Event.data] property is of type `str`
+    and contains the URL.
+
     Note:
         Works only on the following platforms: iOS, Android and macOS.
     """
 
-    on_web_resource_error: ft.OptionalControlEventHandler["WebView"] = None
+    on_web_resource_error: Optional[ft.ControlEventHandler["WebView"]] = None
     """
     Fires when there is error with loading a webview page resource.
-    
-    Event handler argument's `data` property is of type `str` and contains the error message.
-    
+
+    Event handler argument's [`data`][flet.Event.data] property is of type
+    `str` and contains the error message.
+
     Note:
         Works only on the following platforms: iOS, Android and macOS.
     """
 
-    on_progress: ft.OptionalControlEventHandler["WebView"] = None
+    on_progress: Optional[ft.ControlEventHandler["WebView"]] = None
     """
     Fires when the progress of the webview page loading is changed.
-    
-    Event handler argument's `data` property is of type `int` and contains the progress value.
-    
+
+    Event handler argument's [`data`][flet.Event.data] property is of type
+    `int` and contains the progress value.
+
     Note:
         Works only on the following platforms: iOS, Android and macOS.
     """
 
-    on_url_change: ft.OptionalControlEventHandler["WebView"] = None
+    on_url_change: Optional[ft.ControlEventHandler["WebView"]] = None
     """
     Fires when the URL of the webview page is changed.
-    
-    Event handler argument's `data` property is of type `str` and contains the new URL.
-    
+
+    Event handler argument's [`data`][flet.Event.data] property is of type
+    `str` and contains the new URL.
+
     Note:
         Works only on the following platforms: iOS, Android and macOS.
     """
 
-    on_scroll: ft.OptionalEventHandler[WebViewScrollEvent["WebView"]] = None
+    on_scroll: Optional[ft.EventHandler[WebViewScrollEvent]] = None
     """
     Fires when the web page's scroll position changes.
-    
-    Event handler argument is of type `WebviewScrollEvent`.
-    
+
     Note:
         Works only on the following platforms: iOS, Android and macOS.
     """
 
-    on_console_message: ft.OptionalEventHandler[
-        WebViewConsoleMessageEvent["WebView"]
-    ] = None
+    on_console_message: Optional[ft.EventHandler[WebViewConsoleMessageEvent]] = None
     """
     Fires when a log message is written to the JavaScript console.
-    
-    Event handler argument is of type `WebviewConsoleMessageEvent`.
-    
+
     Note:
         Works only on the following platforms: iOS, Android and macOS.
     """
 
-    on_javascript_alert_dialog: ft.OptionalEventHandler[
-        WebViewJavaScriptEvent["WebView"]
-    ] = None
+    on_javascript_alert_dialog: Optional[ft.EventHandler[WebViewJavaScriptEvent]] = None
     """
     Fires when the web page attempts to display a JavaScript alert() dialog.
-    
-    Event handler argument is of type `WebviewJavaScriptEvent`.
-    
+
     Note:
         Works only on the following platforms: iOS, Android and macOS.
     """
 
     def _check_mobile_or_mac_platform(self):
-        """Checks/Validates support for the current platform (iOS, Android, or macOS)."""
+        """
+        Checks/Validates support for the current platform (iOS, Android, or macOS).
+        """
         assert self.page is not None, "WebView must be added to page first."
         if self.page.web or self.page.platform not in [
             ft.PagePlatform.ANDROID,
@@ -312,10 +310,12 @@ class WebView(ft.ConstrainedControl):
 
     async def get_current_url_async(self) -> Optional[str]:
         """
-        Returns the current URL that the WebView is displaying or `None` if no URL was ever loaded.
+        Returns the current URL that the WebView is displaying or `None`
+        if no URL was ever loaded.
 
         Returns:
-            The current URL that the WebView is displaying or `None` if no URL was ever loaded.
+            The current URL that the WebView is displaying or `None`
+            if no URL was ever loaded.
 
         Note:
             Works only on the following platforms: iOS, Android and macOS.
@@ -373,7 +373,10 @@ class WebView(ft.ConstrainedControl):
             Works only on the following platforms: iOS, Android and macOS.
         """
         self._check_mobile_or_mac_platform()
-        await self._invoke_method_async("load_file", arguments={"path": path})
+        await self._invoke_method_async(
+            method_name="load_file",
+            arguments={"path": path},
+        )
 
     def load_request(self, url: str, method: RequestMethod = RequestMethod.GET):
         """
@@ -428,7 +431,10 @@ class WebView(ft.ConstrainedControl):
             Works only on the following platforms: iOS, Android and macOS.
         """
         self._check_mobile_or_mac_platform()
-        await self._invoke_method_async("run_javascript", arguments={"value": value})
+        await self._invoke_method_async(
+            method_name="run_javascript",
+            arguments={"value": value},
+        )
 
     def load_html(self, value: str, base_url: Optional[str] = None):
         """
@@ -486,7 +492,10 @@ class WebView(ft.ConstrainedControl):
             Works only on the following platforms: iOS, Android and macOS.
         """
         self._check_mobile_or_mac_platform()
-        await self._invoke_method_async("scroll_to", arguments={"x": x, "y": y})
+        await self._invoke_method_async(
+            method_name="scroll_to",
+            arguments={"x": x, "y": y},
+        )
 
     def scroll_by(self, x: int, y: int):
         """
@@ -514,4 +523,7 @@ class WebView(ft.ConstrainedControl):
             Works only on the following platforms: iOS, Android and macOS.
         """
         self._check_mobile_or_mac_platform()
-        await self._invoke_method_async("scroll_by", arguments={"x": x, "y": y})
+        await self._invoke_method_async(
+            method_name="scroll_by",
+            arguments={"x": x, "y": y},
+        )

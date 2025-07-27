@@ -1,14 +1,18 @@
 from dataclasses import dataclass
 from enum import Enum
+from typing import TYPE_CHECKING
 
 import flet as ft
 
+if TYPE_CHECKING:
+    from .webview import WebView  # noqa
+
 __all__ = [
-    "RequestMethod",
     "LogLevelSeverity",
-    "WebViewScrollEvent",
+    "RequestMethod",
     "WebViewConsoleMessageEvent",
     "WebViewJavaScriptEvent",
+    "WebViewScrollEvent",
 ]
 
 
@@ -45,16 +49,22 @@ class LogLevelSeverity(Enum):
 
 
 @dataclass
-class WebViewScrollEvent(ft.Event[ft.EventControlType]):
+class WebViewScrollEvent(ft.Event["WebView"]):
     x: float
-    """The value of the horizontal offset with the origin being at the leftmost of the `WebView`."""
+    """
+    The value of the horizontal offset with the origin being at the
+    leftmost of the `WebView`.
+    """
 
     y: float
-    """The value of the vertical offset with the origin being at the topmost of the `WebView`."""
+    """
+    The value of the vertical offset with the origin being at the
+    topmost of the `WebView`.
+    """
 
 
 @dataclass
-class WebViewConsoleMessageEvent(ft.Event[ft.EventControlType]):
+class WebViewConsoleMessageEvent(ft.Event["WebView"]):
     message: str
     """The message written to the console."""
 
@@ -63,7 +73,7 @@ class WebViewConsoleMessageEvent(ft.Event[ft.EventControlType]):
 
 
 @dataclass
-class WebViewJavaScriptEvent(ft.Event[ft.EventControlType]):
+class WebViewJavaScriptEvent(ft.Event["WebView"]):
     message: str
     """The message to be displayed in the window."""
 
