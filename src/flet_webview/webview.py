@@ -315,7 +315,7 @@ class WebView(ft.ConstrainedControl):
 
         Returns:
             The current URL that the WebView is displaying or `None`
-            if no URL was ever loaded.
+                if no URL was ever loaded.
 
         Note:
             Works only on the following platforms: iOS, Android and macOS.
