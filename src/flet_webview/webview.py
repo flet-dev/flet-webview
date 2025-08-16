@@ -377,6 +377,7 @@ class WebView(ft.ConstrainedControl):
         Args:
             mode: The JavaScript mode to set.
         """
+        self._check_mobile_or_mac_platform()
         await self._invoke_method(
             method_name="set_javascript_mode",
             arguments={"mode": mode},
