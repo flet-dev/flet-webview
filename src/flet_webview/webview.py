@@ -2,7 +2,7 @@ from typing import Optional
 
 import flet as ft
 
-from .types import (
+from flet_webview.types import (
     RequestMethod,
     WebViewConsoleMessageEvent,
     WebViewJavaScriptEvent,

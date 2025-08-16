@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING
 import flet as ft
 
 if TYPE_CHECKING:
-    from .webview import WebView  # noqa
+    from flet_webview.webview import WebView  # noqa
 
 __all__ = [
     "LogLevelSeverity",

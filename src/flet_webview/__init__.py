@@ -1,11 +1,11 @@
-from .types import (
+from flet_webview.types import (
     LogLevelSeverity,
     RequestMethod,
     WebViewConsoleMessageEvent,
     WebViewJavaScriptEvent,
     WebViewScrollEvent,
 )
-from .webview import WebView
+from flet_webview.webview import WebView
 
 __all__ = [
     "LogLevelSeverity",
