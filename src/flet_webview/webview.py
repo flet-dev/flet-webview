@@ -3,6 +3,7 @@ from typing import Optional
 import flet as ft
 
 from flet_webview.types import (
+    JavaScriptMode,
     RequestMethod,
     WebViewConsoleMessageEvent,
     WebViewJavaScriptEvent,
@@ -23,14 +24,6 @@ class WebView(ft.ConstrainedControl):
 
     url: str
     """The URL of the web page to load."""
-
-    enable_javascript: Optional[bool] = None
-    """
-    Enable or disable the JavaScript execution on the page.
-
-    Note that disabling the JavaScript execution on the page may result to
-    unexpected web page behaviour.
-    """
 
     prevent_links: Optional[list[str]] = None
     """List of url-prefixes that should not be followed/loaded/downloaded."""
@@ -370,4 +363,21 @@ class WebView(ft.ConstrainedControl):
         await self._invoke_method(
             method_name="scroll_by",
             arguments={"x": x, "y": y},
+        )
+
+    async def set_javascript_mode(self, mode: JavaScriptMode):
+        """
+        Sets the JavaScript mode of the WebView.
+
+        Note:
+            - Works only on the following platforms: iOS, Android and macOS.
+            - Disabling the JavaScript execution on the page may result to
+                unexpected web page behaviour.
+
+        Args:
+            mode: The JavaScript mode to set.
+        """
+        await self._invoke_method(
+            method_name="set_javascript_mode",
+            arguments={"mode": mode},
         )

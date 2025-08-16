@@ -1,4 +1,5 @@
 from flet_webview.types import (
+    JavaScriptMode,
     LogLevelSeverity,
     RequestMethod,
     WebViewConsoleMessageEvent,
@@ -8,6 +9,7 @@ from flet_webview.types import (
 from flet_webview.webview import WebView
 
 __all__ = [
+    "JavaScriptMode",
     "LogLevelSeverity",
     "RequestMethod",
     "WebView",
