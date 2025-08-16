@@ -8,3 +8,11 @@ LoadRequestMethod? parseLoadRequestMethod(String? value,
           (e) => e.name.toLowerCase() == value.toLowerCase()) ??
       defaultValue;
 }
+
+JavaScriptMode? parseJavaScriptMode(String? value,
+    [JavaScriptMode? defaultValue]) {
+  if (value == null) return defaultValue;
+  return JavaScriptMode.values.firstWhereOrNull(
+          (e) => e.name.toLowerCase() == value.toLowerCase()) ??
+      defaultValue;
+}

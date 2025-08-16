@@ -45,9 +45,6 @@ To install the `flet-webview` package and add it to your project dependencies:
     poetry add flet-webview
     ```
 
+### Examples
 
-## Example
-
-```python title="main.py"
---8<-- "examples/webview_example/src/main.py"
-``` 
+See [these](webview.md#examples).

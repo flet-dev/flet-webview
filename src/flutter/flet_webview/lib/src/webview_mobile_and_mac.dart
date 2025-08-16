@@ -154,10 +154,9 @@ class _WebviewMobileAndMacState extends State<WebviewMobileAndMac> {
         }
         break;
       case "set_javascript_mode":
-        var value = parseBool(args["value"]);
-        if (value != null) {
-          await controller.setJavaScriptMode(
-              value ? JavaScriptMode.unrestricted : JavaScriptMode.disabled);
+        var mode = parseJavaScriptMode(args["mode"]);
+        if (mode != null) {
+          await controller.setJavaScriptMode(mode);
         }
         break;
       default:
