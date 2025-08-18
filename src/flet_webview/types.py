@@ -5,9 +5,10 @@ from typing import TYPE_CHECKING
 import flet as ft
 
 if TYPE_CHECKING:
-    from .webview import WebView  # noqa
+    from flet_webview.webview import WebView  # noqa
 
 __all__ = [
+    "JavaScriptMode",
     "LogLevelSeverity",
     "RequestMethod",
     "WebViewConsoleMessageEvent",
@@ -46,6 +47,16 @@ class LogLevelSeverity(Enum):
 
     LOG = "log"
     """Indicates a log message was logged using the `console.log` method."""
+
+
+class JavaScriptMode(Enum):
+    """Defines the state of JavaScript support in the `WebView`."""
+
+    UNRESTRICTED = "unrestricted"
+    """JavaScript execution is unrestricted."""
+
+    DISABLED = "disabled"
+    """JavaScript execution is disabled."""
 
 
 @dataclass
