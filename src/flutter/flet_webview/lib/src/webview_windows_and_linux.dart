@@ -18,6 +18,8 @@ class _WebviewDesktopState extends State<WebviewDesktop> {
       windows_webview.WebviewController();
   bool _isInitialized = false;
   String? _errorMessage;
+  bool _canGoBack = false;
+  bool _canGoForward = false;
 
   @override
   void initState() {
@@ -54,6 +56,13 @@ class _WebviewDesktopState extends State<WebviewDesktop> {
         }
       });
 
+      _controller.historyChanged.listen((history) {
+        setState(() {
+          _canGoBack = history.canGoBack;
+          _canGoForward = history.canGoForward;
+        });
+      });
+
       // Load initial URL
       final url = widget.control.getString("url", "https://flet.dev")!;
       await _controller.loadUrl(url);
@@ -87,14 +96,26 @@ class _WebviewDesktopState extends State<WebviewDesktop> {
         await _controller.reload();
         break;
       case "can_go_back":
-        return _controller.historyState.value.canGoBack.toString();
+        return _canGoBack.toString();
       case "can_go_forward":
-        return _controller.historyState.value.canGoForward.toString();
+        return _canGoForward.toString();
       case "go_back":
-        await _controller.goBack();
+        if (_canGoBack) {
+          await _controller.goBack();
+        }
         break;
       case "go_forward":
-        await _controller.goForward();
+        if (_canGoForward) {
+          await _controller.goForward();
+        }
+        break;
+      case "enable_zoom":
+        await _controller.setZoomFactor(1.0);
+        debugPrint("Zoom enabled (webview_windows doesn't have explicit enable_zoom)");
+        break;
+      case "disable_zoom":
+        await _controller.setZoomFactor(1.0);
+        debugPrint("Zoom disabled (webview_windows doesn't have explicit disable_zoom)");
         break;
       case "clear_cache":
         await _controller.clearCache();
@@ -102,10 +123,19 @@ class _WebviewDesktopState extends State<WebviewDesktop> {
       case "clear_cookies":
         await _controller.clearCookies();
         break;
+      case "clear_local_storage":
+        debugPrint("clear_local_storage not supported on Windows WebView");
+        break;
       case "get_current_url":
         return _controller.url.value;
       case "get_title":
         return _controller.title.value;
+      case "get_user_agent":
+        debugPrint("get_user_agent not supported on Windows WebView (can only set)");
+        return null;
+      case "load_file":
+        debugPrint("load_file not supported on Windows WebView");
+        break;
       case "load_html":
         await _controller.loadStringContent(args["value"]);
         break;
@@ -120,6 +150,12 @@ class _WebviewDesktopState extends State<WebviewDesktop> {
         if (javascript != null) {
           await _controller.executeScript(javascript);
         }
+        break;
+      case "scroll_to":
+        debugPrint("scroll_to not supported on Windows WebView");
+        break;
+      case "scroll_by":
+        debugPrint("scroll_by not supported on Windows WebView");
         break;
       case "set_javascript_mode":
         // webview_windows always has JavaScript enabled
