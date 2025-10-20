@@ -110,12 +110,10 @@ class _WebviewDesktopState extends State<WebviewDesktop> {
         }
         break;
       case "enable_zoom":
-        await _controller.setZoomFactor(1.0);
-        debugPrint("Zoom enabled (webview_windows doesn't have explicit enable_zoom)");
+        debugPrint("enable_zoom not explicitly supported on Windows WebView (use setZoomFactor)");
         break;
       case "disable_zoom":
-        await _controller.setZoomFactor(1.0);
-        debugPrint("Zoom disabled (webview_windows doesn't have explicit disable_zoom)");
+        debugPrint("disable_zoom not explicitly supported on Windows WebView (use setZoomFactor)");
         break;
       case "clear_cache":
         await _controller.clearCache();
