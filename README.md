@@ -19,7 +19,7 @@ This package supports the following platforms:
 
 | Platform | Supported |
 |----------|:---------:|
-| Windows  |     ❌     |
+| Windows  |     ✅     |
 | macOS    |     ✅     |
 | Linux    |     ❌     |
 | iOS      |     ✅     |

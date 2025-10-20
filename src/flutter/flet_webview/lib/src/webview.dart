@@ -21,7 +21,7 @@ class WebViewControl extends StatelessWidget {
     } else if (isMobilePlatform() || isMacOSDesktop()) {
       view = WebviewMobileAndMac(control: control);
     } else if (isWindowsDesktop() || isLinuxDesktop()) {
-      view = const WebviewDesktop();
+      view = WebviewDesktop(control: control);
     }
 
     return ConstrainedControl(control: control, child: view);
